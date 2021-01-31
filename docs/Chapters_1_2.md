@@ -11,7 +11,7 @@ output:
 # Introduction
 
 - Concept of combining prior and posterior beliefs
-- Three oals of inference:
+- Three goals of inference:
     - Parameter Estimation
     - Prediction
     - Model Comparison

@@ -6,3 +6,9 @@ exercise-2.3
 exercise-2.4
 excerise-2.5
 exercise-2.6
+intro-to-probability
+exercise-3.1
+exercise-3.2
+exercise-3.3
+exercsie-3.4
+exercise-3.5

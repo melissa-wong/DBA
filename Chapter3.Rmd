@@ -2,8 +2,7 @@
 
 ## Exercise 3.1
 
-
-```r
+```{r message=FALSE}
 library(tidyverse)
 
 set.seed(123)
@@ -20,8 +19,6 @@ ggplot() +
   geom_hline(mapping=aes(yintercept=p), color="red")
 ```
 
-<img src="Chapter3_files/figure-html/unnamed-chunk-1-1.png" width="672" />
-
 ## Exercise 3.2
 
 A. $P[X=10] = \frac{8}{48} = \frac{1}{6}$
@@ -32,8 +29,7 @@ B. $P[X=10 or X=Jack] = \frac{1}{6} + \frac{1}{6} = \frac{1}{3}$
 
 A.
 
-
-```r
+```{r results="hold"}
 dx <- 0.01
 x <- seq(0, 1, dx)
 px <- 6*x * (1-x)
@@ -41,18 +37,11 @@ px <- 6*x * (1-x)
 ggplot()+
   geom_line(mapping=aes(x=x, y=px)) +
   labs(title="pdf")
-```
 
-<img src="Chapter3_files/figure-html/unnamed-chunk-2-1.png" width="672" />
-
-```r
 # Approximate Integral
 area = sum(dx * px)
 paste("The area under the curve is approximately", area)
-```
 
-```
-## [1] "The area under the curve is approximately 0.9999"
 ```
 
 
@@ -66,13 +55,12 @@ B.
 
 C. Yes, it satisfies equation 3.3.
 
-D. The maximum value of $p(x) = 1.5
+D. The maximum value of $p(x) = `r max(px)`
 
 ## Exercsie 3.4
 
 A. and B.
-
-```r
+```{r results="hold"}
 mu <- 162
 sigma <- 15
 
@@ -83,18 +71,11 @@ px <- 1/(sigma * sqrt(2*pi)) * exp(-((x-mu)/sigma)^2/2)
 ggplot()+
   geom_line(mapping=aes(x=x, y=px)) +
   labs(title="pdf")
-```
 
-<img src="Chapter3_files/figure-html/unnamed-chunk-3-1.png" width="672" />
-
-```r
 # Approximate Integral
 area = sum(dx * px)
 paste("The area under the curve is approximately", round(area, 2))
-```
 
-```
-## [1] "The area under the curve is approximately 0.68"
 ```
 
 ## Exercise 3.5
