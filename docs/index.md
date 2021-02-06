@@ -1,7 +1,7 @@
 --- 
 title: "Examples from Doing Bayesian Data Analysis"
 author: "Melissa Wong"
-date: "2021-01-30"
+date: "2021-02-05"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
