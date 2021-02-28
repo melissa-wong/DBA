@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Examples from Doing Bayesian Data Analysis</title>
+  <title>Chapter 4 Bayes’ Rule | Examples from Doing Bayesian Data Analysis</title>
   <meta name="description" content="Worked examples from Doing Bayesian Data Analysis." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Examples from Doing Bayesian Data Analysis" />
+  <meta property="og:title" content="Chapter 4 Bayes’ Rule | Examples from Doing Bayesian Data Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="melissa-wong/DBA" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Examples from Doing Bayesian Data Analysis" />
+  <meta name="twitter:title" content="Chapter 4 Bayes’ Rule | Examples from Doing Bayesian Data Analysis" />
   
   <meta name="twitter:description" content="Worked examples from Doing Bayesian Data Analysis." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="book-organization.html"/>
+<link rel="prev" href="intro-to-probability.html"/>
+<link rel="next" href="binomial-proportions-via-mathematical-analysis.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -200,23 +200,144 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Examples from Doing Bayesian Data Analysis</h1>
-<p class="author"><em>Melissa Wong</em></p>
-<p class="date"><em>2021-02-28</em></p>
+<div id="bayes-rule" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Bayes’ Rule</h1>
+<div id="exercise-4.1" class="section level2">
+<h2><span class="header-section-number">4.1</span> Exercise 4.1</h2>
+<p>Given <span class="math inline">\(P(\theta = disease) = 0.001\)</span>, <span class="math inline">\(P(+ | disease) = 0.99\)</span> and <span class="math inline">\(P(+ | no disease) = 0.05\)</span></p>
+<p><span class="math display">\[\begin{align*}
+  P(disease | +) &amp;= \frac{0.99 * 0.001}{0.99 * 0.001 + 0.05 * 0.999} \\
+                &amp;= 0.019
+\end{align*}\]</span></p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>I picked up a used copy of the 1st edition of <a href="https://sites.google.com/site/doingbayesiandataanalysis/">Doing Bayesian Data Analysis</a>, so I created this project to keep a record of my notes as I work through the examples.</p>
+<div id="exercise-4.2" class="section level2">
+<h2><span class="header-section-number">4.2</span> Exercise 4.2</h2>
+<p><span class="math display">\[\begin{align*}
+  P(disease | -,+) &amp;= \frac{P(- | disease) * 0.019)}{P(-)} \\
+                   &amp;= \frac{0.01 * 0.019}{0.01 * 0.001 + 0.95 * 0.999} \\
+                   &amp;= 0.0002
+\end{align*}\]</span></p>
+</div>
+<div id="exercise-4.3" class="section level2">
+<h2><span class="header-section-number">4.3</span> Exercise 4.3</h2>
+<div id="part-a" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Part a</h3>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>disease</th>
+<th>no disease</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D=+</td>
+<td>99</td>
+<td>4995</td>
+</tr>
+<tr class="even">
+<td>D=-</td>
+<td>1</td>
+<td>94905</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>100</td>
+<td>99900</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="part-b" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Part b</h3>
+<p><span class="math inline">\(P(disease | +) = \frac{99}{99 + 4995} = 0.019\)</span></p>
+</div>
+<div id="part-c" class="section level3">
+<h3><span class="header-section-number">4.3.3</span> Part c</h3>
+<p>1st stage:</p>
+<p>Number of people with disease who test postive: 10000 * 0.99 = 9900</p>
+<p>Number of people without disease who test positive: 9990000 * 0.05 = 499500</p>
+<p>2nd stage - Retest those with positive tests</p>
+<p>Number of people with disease who test negative 2nd time: 9900 * 0.01 = 99</p>
+<p>Number of people without disease who test negative 2nd time: 499500 * 0.95 = 474525</p>
+</div>
+<div id="part-d" class="section level3">
+<h3><span class="header-section-number">4.3.4</span> Part d</h3>
+<p><span class="math inline">\(P(disease | -, +) = \frac{99}{99 + 474525} = 0.0002\)</span></p>
+</div>
+</div>
+<div id="exercise-4.4" class="section level2">
+<h2><span class="header-section-number">4.4</span> Exercise 4.4</h2>
+<p><span class="math display">\[\begin{align*}
+  P(D | -) &amp;= \frac{P(-|D)P(D)}{P(-)} \\
+           &amp;= \frac{0.01 * 0.001}{0.01 * 0.001 + 0.95 * 0.999} \\
+           &amp;= 1.054* 10^{-5}
+\end{align*}\]</span></p>
+<p><span class="math display">\[\begin{align*}
+  P(D | +, -) &amp;= \frac{P(+|D) * 1.054*10^{-5}}{P(+)} \\
+              &amp;= \frac{0.99 * 1.054*10^{-5}}{0.99*0.001 + 0.05 * 0.999} \\
+              &amp;= 0.0002
+\end{align*}\]</span></p>
+<p>The result is the same as Part d. In other words, the order of the tests doesn’t change the conclusion which is consistent with the assumption that the tests are independent.</p>
+</div>
+<div id="exercise-4.5" class="section level2">
+<h2><span class="header-section-number">4.5</span> Exercise 4.5</h2>
+<p>Given <span class="math inline">\(P(Language Study) = 0.5\)</span>, then</p>
+<p><span class="math display">\[\begin{align*}
+  P(Language Study | ROI) &amp;= \frac{P(ROI|Language Study) P(Language Study)}{P(ROI)}\\
+                          &amp;= \frac{166/(166+703) * 0.5}{0.5*(166/(166+703) + 199/(199+2154))} \\
+                          &amp;= 0.69
+\end{align*}\]</span></p>
+</div>
+<div id="exercise-4.6" class="section level2">
+<h2><span class="header-section-number">4.6</span> Exercise 4.6</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="bayes-rule.html#cb10-1"></a>theta &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>)</span>
+<span id="cb10-2"><a href="bayes-rule.html#cb10-2"></a>prior &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.25</span>)</span>
+<span id="cb10-3"><a href="bayes-rule.html#cb10-3"></a>likelihood &lt;-<span class="st"> </span>theta<span class="op">^</span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>theta)<span class="op">^</span><span class="dv">9</span></span>
+<span id="cb10-4"><a href="bayes-rule.html#cb10-4"></a></span>
+<span id="cb10-5"><a href="bayes-rule.html#cb10-5"></a>num &lt;-<span class="st"> </span>prior <span class="op">*</span><span class="st"> </span>likelihood</span>
+<span id="cb10-6"><a href="bayes-rule.html#cb10-6"></a>den &lt;-<span class="st"> </span><span class="kw">sum</span>(num)</span>
+<span id="cb10-7"><a href="bayes-rule.html#cb10-7"></a></span>
+<span id="cb10-8"><a href="bayes-rule.html#cb10-8"></a>post &lt;-<span class="st"> </span>num<span class="op">/</span>den</span>
+<span id="cb10-9"><a href="bayes-rule.html#cb10-9"></a></span>
+<span id="cb10-10"><a href="bayes-rule.html#cb10-10"></a>knitr<span class="op">::</span><span class="kw">kable</span>(tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">theta =</span> theta, <span class="dt">posterior =</span> post))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">theta</th>
+<th align="right">posterior</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.25</td>
+<td align="right">0.7054333</td>
+</tr>
+<tr class="even">
+<td align="right">0.50</td>
+<td align="right">0.2935990</td>
+</tr>
+<tr class="odd">
+<td align="right">0.75</td>
+<td align="right">0.0009677</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="exercise-4.7" class="section level2">
+<h2><span class="header-section-number">4.7</span> Exercise 4.7</h2>
+<p><span class="math inline">\(P(D) = P(D|\theta=0.25)*0.25 + P(D|\theta=0.5) * 0.5 + P(D|\theta=0.75) * 0.25\)</span> which is the same as the sum of the likelihood * prior calculated in exercise 4.6.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="book-organization.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="intro-to-probability.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="binomial-proportions-via-mathematical-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

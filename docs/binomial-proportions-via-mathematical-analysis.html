@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Binomial Proportions via Mathematical Analysis | Examples from Doing Bayesian Data Analysis</title>
+  <meta name="description" content="Worked examples from Doing Bayesian Data Analysis." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Binomial Proportions via Mathematical Analysis | Examples from Doing Bayesian Data Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Worked examples from Doing Bayesian Data Analysis." />
+  <meta name="github-repo" content="melissa-wong/DBA" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Binomial Proportions via Mathematical Analysis | Examples from Doing Bayesian Data Analysis" />
+  
+  <meta name="twitter:description" content="Worked examples from Doing Bayesian Data Analysis." />
+  
+
+<meta name="author" content="Melissa Wong" />
+
+
+<meta name="date" content="2021-02-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="bayes-rule.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="book-organization.html"><a href="book-organization.html"><i class="fa fa-check"></i><b>1</b> Book Organization</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#exercise-2.1"><i class="fa fa-check"></i><b>2.1</b> Exercise 2.1</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#exercise-2.2"><i class="fa fa-check"></i><b>2.2</b> Exercise 2.2</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#exercise-2.3"><i class="fa fa-check"></i><b>2.3</b> Exercise 2.3</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction.html"><a href="introduction.html#exercise-2.4"><i class="fa fa-check"></i><b>2.4</b> Exercise 2.4</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction.html"><a href="introduction.html#excerise-2.5"><i class="fa fa-check"></i><b>2.5</b> Excerise 2.5</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction.html"><a href="introduction.html#exercise-2.6"><i class="fa fa-check"></i><b>2.6</b> Exercise 2.6</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="intro-to-probability.html"><a href="intro-to-probability.html"><i class="fa fa-check"></i><b>3</b> Intro to Probability</a><ul>
+<li class="chapter" data-level="3.1" data-path="intro-to-probability.html"><a href="intro-to-probability.html#exercise-3.1"><i class="fa fa-check"></i><b>3.1</b> Exercise 3.1</a></li>
+<li class="chapter" data-level="3.2" data-path="intro-to-probability.html"><a href="intro-to-probability.html#exercise-3.2"><i class="fa fa-check"></i><b>3.2</b> Exercise 3.2</a></li>
+<li class="chapter" data-level="3.3" data-path="intro-to-probability.html"><a href="intro-to-probability.html#exercise-3.3"><i class="fa fa-check"></i><b>3.3</b> Exercise 3.3</a></li>
+<li class="chapter" data-level="3.4" data-path="intro-to-probability.html"><a href="intro-to-probability.html#exercsie-3.4"><i class="fa fa-check"></i><b>3.4</b> Exercsie 3.4</a></li>
+<li class="chapter" data-level="3.5" data-path="intro-to-probability.html"><a href="intro-to-probability.html#exercise-3.5"><i class="fa fa-check"></i><b>3.5</b> Exercise 3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="bayes-rule.html"><a href="bayes-rule.html"><i class="fa fa-check"></i><b>4</b> Bayes’ Rule</a><ul>
+<li class="chapter" data-level="4.1" data-path="bayes-rule.html"><a href="bayes-rule.html#exercise-4.1"><i class="fa fa-check"></i><b>4.1</b> Exercise 4.1</a></li>
+<li class="chapter" data-level="4.2" data-path="bayes-rule.html"><a href="bayes-rule.html#exercise-4.2"><i class="fa fa-check"></i><b>4.2</b> Exercise 4.2</a></li>
+<li class="chapter" data-level="4.3" data-path="bayes-rule.html"><a href="bayes-rule.html#exercise-4.3"><i class="fa fa-check"></i><b>4.3</b> Exercise 4.3</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="bayes-rule.html"><a href="bayes-rule.html#part-a"><i class="fa fa-check"></i><b>4.3.1</b> Part a</a></li>
+<li class="chapter" data-level="4.3.2" data-path="bayes-rule.html"><a href="bayes-rule.html#part-b"><i class="fa fa-check"></i><b>4.3.2</b> Part b</a></li>
+<li class="chapter" data-level="4.3.3" data-path="bayes-rule.html"><a href="bayes-rule.html#part-c"><i class="fa fa-check"></i><b>4.3.3</b> Part c</a></li>
+<li class="chapter" data-level="4.3.4" data-path="bayes-rule.html"><a href="bayes-rule.html#part-d"><i class="fa fa-check"></i><b>4.3.4</b> Part d</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="bayes-rule.html"><a href="bayes-rule.html#exercise-4.4"><i class="fa fa-check"></i><b>4.4</b> Exercise 4.4</a></li>
+<li class="chapter" data-level="4.5" data-path="bayes-rule.html"><a href="bayes-rule.html#exercise-4.5"><i class="fa fa-check"></i><b>4.5</b> Exercise 4.5</a></li>
+<li class="chapter" data-level="4.6" data-path="bayes-rule.html"><a href="bayes-rule.html#exercise-4.6"><i class="fa fa-check"></i><b>4.6</b> Exercise 4.6</a></li>
+<li class="chapter" data-level="4.7" data-path="bayes-rule.html"><a href="bayes-rule.html#exercise-4.7"><i class="fa fa-check"></i><b>4.7</b> Exercise 4.7</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html"><i class="fa fa-check"></i><b>5</b> Binomial Proportions via Mathematical Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#excercise-5.1"><i class="fa fa-check"></i><b>5.1</b> Excercise 5.1</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#part-a-1"><i class="fa fa-check"></i><b>5.1.1</b> Part a</a></li>
+<li class="chapter" data-level="5.1.2" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#part-c-1"><i class="fa fa-check"></i><b>5.1.2</b> Part c</a></li>
+<li class="chapter" data-level="5.1.3" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#part-d-1"><i class="fa fa-check"></i><b>5.1.3</b> Part d</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#excercse-5.3"><i class="fa fa-check"></i><b>5.2</b> Excercse 5.3</a></li>
+<li class="chapter" data-level="5.3" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#exercise-5.4"><i class="fa fa-check"></i><b>5.3</b> Exercise 5.4</a></li>
+<li class="chapter" data-level="5.4" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#exercise-5.5"><i class="fa fa-check"></i><b>5.4</b> Exercise 5.5</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#part-a-2"><i class="fa fa-check"></i><b>5.4.1</b> Part a</a></li>
+<li class="chapter" data-level="5.4.2" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#part-b-1"><i class="fa fa-check"></i><b>5.4.2</b> Part b</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#exercise-5.6"><i class="fa fa-check"></i><b>5.5</b> Exercise 5.6</a></li>
+<li class="chapter" data-level="5.6" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#exercise-5.7"><i class="fa fa-check"></i><b>5.6</b> Exercise 5.7</a></li>
+<li class="chapter" data-level="5.7" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#exercise-5.8"><i class="fa fa-check"></i><b>5.7</b> Exercise 5.8</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#part-a-3"><i class="fa fa-check"></i><b>5.7.1</b> Part a</a></li>
+<li class="chapter" data-level="5.7.2" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#part-b-2"><i class="fa fa-check"></i><b>5.7.2</b> Part b</a></li>
+<li class="chapter" data-level="5.7.3" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#part-c-2"><i class="fa fa-check"></i><b>5.7.3</b> Part c</a></li>
+<li class="chapter" data-level="5.7.4" data-path="binomial-proportions-via-mathematical-analysis.html"><a href="binomial-proportions-via-mathematical-analysis.html#part-d-2"><i class="fa fa-check"></i><b>5.7.4</b> Part d</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Examples from Doing Bayesian Data Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="binomial-proportions-via-mathematical-analysis" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Binomial Proportions via Mathematical Analysis</h1>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb11-1"></a><span class="kw">library</span>(tidyr)</span>
+<span id="cb11-2"><a href="binomial-proportions-via-mathematical-analysis.html#cb11-2"></a><span class="kw">library</span>(magrittr)</span>
+<span id="cb11-3"><a href="binomial-proportions-via-mathematical-analysis.html#cb11-3"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb11-4"><a href="binomial-proportions-via-mathematical-analysis.html#cb11-4"></a><span class="kw">library</span>(RColorBrewer)</span></code></pre></div>
+<div id="excercise-5.1" class="section level2">
+<h2><span class="header-section-number">5.1</span> Excercise 5.1</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-1"></a><span class="co"># HHT Sequence</span></span>
+<span id="cb12-2"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-2"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb12-3"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-3"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> N)</span>
+<span id="cb12-4"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-4"></a>prior &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">4</span>, <span class="dv">4</span>)</span>
+<span id="cb12-5"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-5"></a>post1 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">5</span>, <span class="dv">4</span>)</span>
+<span id="cb12-6"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-6"></a>post2 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">6</span>, <span class="dv">4</span>)</span>
+<span id="cb12-7"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-7"></a>post3 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">6</span>, <span class="dv">5</span>)</span>
+<span id="cb12-8"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-8"></a></span>
+<span id="cb12-9"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-9"></a>tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">prior =</span> prior, <span class="dt">post1 =</span> post1,</span>
+<span id="cb12-10"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-10"></a>               <span class="dt">post2 =</span> post2, <span class="dt">post3 =</span> post3) <span class="op">%&gt;%</span></span>
+<span id="cb12-11"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-11"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols=</span><span class="op">-</span>x, <span class="dt">values_to=</span><span class="st">&quot;density&quot;</span>, <span class="dt">names_to=</span><span class="st">&quot;type&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb12-12"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-12"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb12-13"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-13"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>density, <span class="dt">color=</span>type)) <span class="op">+</span></span>
+<span id="cb12-14"><a href="binomial-proportions-via-mathematical-analysis.html#cb12-14"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set2&quot;</span>)</span></code></pre></div>
+<p><img src="Chapter5_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-1"></a><span class="co"># THH Sequence</span></span>
+<span id="cb13-2"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-2"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb13-3"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-3"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> N)</span>
+<span id="cb13-4"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-4"></a>prior &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">4</span>, <span class="dv">4</span>)</span>
+<span id="cb13-5"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-5"></a>post1 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<span id="cb13-6"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-6"></a>post2 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">5</span>, <span class="dv">5</span>)</span>
+<span id="cb13-7"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-7"></a>post3 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">6</span>, <span class="dv">5</span>)</span>
+<span id="cb13-8"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-8"></a></span>
+<span id="cb13-9"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-9"></a>tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">prior =</span> prior, <span class="dt">post1 =</span> post1,</span>
+<span id="cb13-10"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-10"></a>               <span class="dt">post2 =</span> post2, <span class="dt">post3 =</span> post3) <span class="op">%&gt;%</span></span>
+<span id="cb13-11"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-11"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols=</span><span class="op">-</span>x, <span class="dt">values_to=</span><span class="st">&quot;density&quot;</span>, <span class="dt">names_to=</span><span class="st">&quot;type&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb13-12"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-12"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb13-13"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-13"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>density, <span class="dt">color=</span>type)) <span class="op">+</span></span>
+<span id="cb13-14"><a href="binomial-proportions-via-mathematical-analysis.html#cb13-14"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set2&quot;</span>)</span></code></pre></div>
+<p><img src="Chapter5_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+## Exercise 5.2</p>
+<div id="part-a-1" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Part a</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-1"></a>HDIofICDF =<span class="st"> </span><span class="cf">function</span>( ICDFname , <span class="dt">credMass=</span><span class="fl">0.95</span> , <span class="dt">tol=</span><span class="fl">1e-8</span> , ... ) {</span>
+<span id="cb14-2"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-2"></a>   <span class="co"># Arguments:</span></span>
+<span id="cb14-3"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-3"></a>   <span class="co">#   ICDFname is R&#39;s name for the inverse cumulative density function</span></span>
+<span id="cb14-4"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-4"></a>   <span class="co">#     of the distribution.</span></span>
+<span id="cb14-5"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-5"></a>   <span class="co">#   credMass is the desired mass of the HDI region.</span></span>
+<span id="cb14-6"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-6"></a>   <span class="co">#   tol is passed to R&#39;s optimize function.</span></span>
+<span id="cb14-7"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-7"></a>   <span class="co"># Return value:</span></span>
+<span id="cb14-8"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-8"></a>   <span class="co">#   Highest density iterval (HDI) limits in a vector.</span></span>
+<span id="cb14-9"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-9"></a>   <span class="co"># Example of use: For determining HDI of a beta(30,12) distribution, type</span></span>
+<span id="cb14-10"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-10"></a>   <span class="co">#   HDIofICDF( qbeta , shape1 = 30 , shape2 = 12 )</span></span>
+<span id="cb14-11"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-11"></a>   <span class="co">#   Notice that the parameters of the ICDFname must be explicitly named;</span></span>
+<span id="cb14-12"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-12"></a>   <span class="co">#   e.g., HDIofICDF( qbeta , 30 , 12 ) does not work.</span></span>
+<span id="cb14-13"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-13"></a>   <span class="co"># Adapted and corrected from Greg Snow&#39;s TeachingDemos package.</span></span>
+<span id="cb14-14"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-14"></a>   incredMass =<span class="st">  </span><span class="fl">1.0</span> <span class="op">-</span><span class="st"> </span>credMass</span>
+<span id="cb14-15"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-15"></a>   intervalWidth =<span class="st"> </span><span class="cf">function</span>( lowTailPr , ICDFname , credMass , ... ) {</span>
+<span id="cb14-16"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-16"></a>      <span class="kw">ICDFname</span>( credMass <span class="op">+</span><span class="st"> </span>lowTailPr , ... ) <span class="op">-</span><span class="st"> </span><span class="kw">ICDFname</span>( lowTailPr , ... )</span>
+<span id="cb14-17"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-17"></a>   }</span>
+<span id="cb14-18"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-18"></a>   optInfo =<span class="st"> </span><span class="kw">optimize</span>( intervalWidth , <span class="kw">c</span>( <span class="dv">0</span> , incredMass ) , <span class="dt">ICDFname=</span>ICDFname ,</span>
+<span id="cb14-19"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-19"></a>                        <span class="dt">credMass=</span>credMass , <span class="dt">tol=</span>tol , ... )</span>
+<span id="cb14-20"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-20"></a>   HDIlowTailPr =<span class="st"> </span>optInfo<span class="op">$</span>minimum</span>
+<span id="cb14-21"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-21"></a>   <span class="kw">return</span>( <span class="kw">c</span>( <span class="kw">ICDFname</span>( HDIlowTailPr , ... ) ,</span>
+<span id="cb14-22"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-22"></a>                <span class="kw">ICDFname</span>( credMass <span class="op">+</span><span class="st"> </span>HDIlowTailPr , ... ) ) )</span>
+<span id="cb14-23"><a href="binomial-proportions-via-mathematical-analysis.html#cb14-23"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb15-1"></a>(lim &lt;-<span class="st"> </span><span class="kw">HDIofICDF</span>(qbeta, <span class="dt">shape1=</span><span class="dv">59</span>, <span class="dt">shape2=</span><span class="dv">43</span>))</span></code></pre></div>
+<pre><code>## [1] 0.4828696 0.6731385</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb17-1"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb17-2"><a href="binomial-proportions-via-mathematical-analysis.html#cb17-2"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb17-3"><a href="binomial-proportions-via-mathematical-analysis.html#cb17-3"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x =</span> x,</span>
+<span id="cb17-4"><a href="binomial-proportions-via-mathematical-analysis.html#cb17-4"></a>                        <span class="dt">y =</span> <span class="kw">dbeta</span>(x, <span class="dv">59</span>, <span class="dv">43</span>))) <span class="op">+</span></span>
+<span id="cb17-5"><a href="binomial-proportions-via-mathematical-analysis.html#cb17-5"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">xintercept=</span>lim), <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>)</span></code></pre></div>
+<p><img src="Chapter5_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+### Part b</p>
+<p>Yes, it is credible to believe the population is evenly split between the two candidates (0.5 is within the 95% credible interval).</p>
+</div>
+<div id="part-c-1" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Part c</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb18-1"></a><span class="kw">HDIofICDF</span>(qbeta, <span class="dt">shape1=</span><span class="dv">57</span><span class="op">+</span><span class="dv">59</span>, <span class="dt">shape2=</span><span class="dv">43</span><span class="op">+</span><span class="dv">43</span>)</span></code></pre></div>
+<pre><code>## [1] 0.5061148 0.6419895</code></pre>
+</div>
+<div id="part-d-1" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> Part d</h3>
+<p>No, it is not credible to believe the population is evenly split between the two candidates (0.5 is outside the 95% credible interval).</p>
+</div>
+</div>
+<div id="excercse-5.3" class="section level2">
+<h2><span class="header-section-number">5.2</span> Excercse 5.3</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb20-1"></a><span class="kw">HDIofICDF</span>(qbeta, <span class="dt">shape1=</span><span class="dv">41</span>, <span class="dt">shape2=</span><span class="dv">11</span>)</span></code></pre></div>
+<pre><code>## [1] 0.6771853 0.8934740</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb22-1"></a><span class="kw">HDIofICDF</span>(qbeta, <span class="dt">shape1=</span><span class="dv">16</span>, <span class="dt">shape2=</span><span class="dv">36</span>)</span></code></pre></div>
+<pre><code>## [1] 0.1865395 0.4329478</code></pre>
+<p>In the first case, subjects are biased towards “F”, and in the second case subjects are biased towards “J”.</p>
+</div>
+<div id="exercise-5.4" class="section level2">
+<h2><span class="header-section-number">5.3</span> Exercise 5.4</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb24-1"></a>(lim &lt;-<span class="st"> </span><span class="kw">HDIofICDF</span>(qbeta, <span class="dt">shape1=</span><span class="fl">4.5</span>, <span class="dt">shape2=</span><span class="fl">1.5</span>))</span></code></pre></div>
+<pre><code>## [1] 0.4360173 0.9982900</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb26-1"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb26-2"><a href="binomial-proportions-via-mathematical-analysis.html#cb26-2"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb26-3"><a href="binomial-proportions-via-mathematical-analysis.html#cb26-3"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x =</span> x,</span>
+<span id="cb26-4"><a href="binomial-proportions-via-mathematical-analysis.html#cb26-4"></a>                        <span class="dt">y =</span> <span class="kw">dbeta</span>(x, <span class="fl">4.5</span>, <span class="fl">1.5</span>))) <span class="op">+</span></span>
+<span id="cb26-5"><a href="binomial-proportions-via-mathematical-analysis.html#cb26-5"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">xintercept=</span>lim), <span class="dt">linetype=</span><span class="st">&quot;dashed&quot;</span>)</span></code></pre></div>
+<p><img src="Chapter5_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="exercise-5.5" class="section level2">
+<h2><span class="header-section-number">5.4</span> Exercise 5.5</h2>
+<div id="part-a-2" class="section level3">
+<h3><span class="header-section-number">5.4.1</span> Part a</h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb27-1"></a><span class="co"># HHT Sequence</span></span>
+<span id="cb27-2"><a href="binomial-proportions-via-mathematical-analysis.html#cb27-2"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb27-3"><a href="binomial-proportions-via-mathematical-analysis.html#cb27-3"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> N)</span>
+<span id="cb27-4"><a href="binomial-proportions-via-mathematical-analysis.html#cb27-4"></a>prior &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">100</span>, <span class="dv">100</span>)</span>
+<span id="cb27-5"><a href="binomial-proportions-via-mathematical-analysis.html#cb27-5"></a>post1 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">109</span>, <span class="dv">101</span>)</span>
+<span id="cb27-6"><a href="binomial-proportions-via-mathematical-analysis.html#cb27-6"></a></span>
+<span id="cb27-7"><a href="binomial-proportions-via-mathematical-analysis.html#cb27-7"></a>tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">prior =</span> prior, <span class="dt">post1 =</span> post1) <span class="op">%&gt;%</span></span>
+<span id="cb27-8"><a href="binomial-proportions-via-mathematical-analysis.html#cb27-8"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols=</span><span class="op">-</span>x, <span class="dt">values_to=</span><span class="st">&quot;density&quot;</span>, <span class="dt">names_to=</span><span class="st">&quot;type&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb27-9"><a href="binomial-proportions-via-mathematical-analysis.html#cb27-9"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb27-10"><a href="binomial-proportions-via-mathematical-analysis.html#cb27-10"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>density, <span class="dt">color=</span>type)) <span class="op">+</span></span>
+<span id="cb27-11"><a href="binomial-proportions-via-mathematical-analysis.html#cb27-11"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set2&quot;</span>)</span></code></pre></div>
+<p><img src="Chapter5_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>The predicted probability for the next coin flip is the expected value of Beta(109, 101) which is <span class="math inline">\(\frac{109}{109+101} = 0.519\)</span></p>
+</div>
+<div id="part-b-1" class="section level3">
+<h3><span class="header-section-number">5.4.2</span> Part b</h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb28-1"></a><span class="co"># HHT Sequence</span></span>
+<span id="cb28-2"><a href="binomial-proportions-via-mathematical-analysis.html#cb28-2"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb28-3"><a href="binomial-proportions-via-mathematical-analysis.html#cb28-3"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> N)</span>
+<span id="cb28-4"><a href="binomial-proportions-via-mathematical-analysis.html#cb28-4"></a>prior &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb28-5"><a href="binomial-proportions-via-mathematical-analysis.html#cb28-5"></a>post1 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="fl">9.5</span>, <span class="fl">1.5</span>)</span>
+<span id="cb28-6"><a href="binomial-proportions-via-mathematical-analysis.html#cb28-6"></a></span>
+<span id="cb28-7"><a href="binomial-proportions-via-mathematical-analysis.html#cb28-7"></a>tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">prior =</span> prior, <span class="dt">post1 =</span> post1) <span class="op">%&gt;%</span></span>
+<span id="cb28-8"><a href="binomial-proportions-via-mathematical-analysis.html#cb28-8"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols=</span><span class="op">-</span>x, <span class="dt">values_to=</span><span class="st">&quot;density&quot;</span>, <span class="dt">names_to=</span><span class="st">&quot;type&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb28-9"><a href="binomial-proportions-via-mathematical-analysis.html#cb28-9"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb28-10"><a href="binomial-proportions-via-mathematical-analysis.html#cb28-10"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>density, <span class="dt">color=</span>type)) <span class="op">+</span></span>
+<span id="cb28-11"><a href="binomial-proportions-via-mathematical-analysis.html#cb28-11"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set2&quot;</span>)</span></code></pre></div>
+<p><img src="Chapter5_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>The predicted probability for the next coin flip is the expected value of Beta(9.5, 1.5) which is <span class="math inline">\(\frac{9.5}{9.5+1.5} = 0.864\)</span></p>
+</div>
+</div>
+<div id="exercise-5.6" class="section level2">
+<h2><span class="header-section-number">5.5</span> Exercise 5.6</h2>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-1"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb29-2"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-2"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> N)</span>
+<span id="cb29-3"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-3"></a></span>
+<span id="cb29-4"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-4"></a><span class="co"># Model 1 - Fair coin</span></span>
+<span id="cb29-5"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-5"></a>post1 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">105</span>, <span class="dv">115</span>)</span>
+<span id="cb29-6"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-6"></a>prob1 &lt;-<span class="st"> </span><span class="kw">beta</span>(<span class="dv">115</span>, <span class="dv">105</span>)<span class="op">/</span><span class="kw">beta</span>(<span class="dv">100</span>, <span class="dv">100</span>)</span>
+<span id="cb29-7"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-7"></a><span class="co"># Model 2 - Biased coin</span></span>
+<span id="cb29-8"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-8"></a>post2 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="fl">15.5</span>, <span class="fl">5.5</span>)</span>
+<span id="cb29-9"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-9"></a>prob2 &lt;-<span class="st"> </span><span class="kw">beta</span>(<span class="fl">15.5</span>, <span class="fl">5.5</span>)<span class="op">/</span><span class="kw">beta</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb29-10"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-10"></a></span>
+<span id="cb29-11"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-11"></a>tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">post1 =</span> post1, <span class="dt">post2 =</span> post2) <span class="op">%&gt;%</span></span>
+<span id="cb29-12"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-12"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols=</span><span class="op">-</span>x, <span class="dt">values_to=</span><span class="st">&quot;density&quot;</span>, <span class="dt">names_to=</span><span class="st">&quot;type&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb29-13"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-13"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb29-14"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-14"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>density, <span class="dt">color=</span>type)) <span class="op">+</span></span>
+<span id="cb29-15"><a href="binomial-proportions-via-mathematical-analysis.html#cb29-15"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set2&quot;</span>)</span></code></pre></div>
+<p><img src="Chapter5_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Fair coin model probability = 1.142463110^{-6}.</p>
+<p>Biased coin model probability = 2.293072610^{-6}.</p>
+<p>The Bayes Factor = 0.4982237.</p>
+<p>There is slightly more evidence in favor of the biased coin model.</p>
+</div>
+<div id="exercise-5.7" class="section level2">
+<h2><span class="header-section-number">5.6</span> Exercise 5.7</h2>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-1"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb30-2"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-2"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> N)</span>
+<span id="cb30-3"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-3"></a></span>
+<span id="cb30-4"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-4"></a><span class="co"># Model 1 - Tail-biased coin</span></span>
+<span id="cb30-5"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-5"></a>post1 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">2</span>, <span class="dv">100</span>)</span>
+<span id="cb30-6"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-6"></a>prob1 &lt;-<span class="st"> </span><span class="kw">beta</span>(<span class="dv">2</span>, <span class="dv">100</span>)<span class="op">/</span><span class="kw">beta</span>(<span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb30-7"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-7"></a><span class="co"># Model 2 - Head-biased coin</span></span>
+<span id="cb30-8"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-8"></a>post2 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">101</span>, <span class="dv">1</span>)</span>
+<span id="cb30-9"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-9"></a>prob2 &lt;-<span class="st"> </span><span class="kw">beta</span>(<span class="dv">101</span>, <span class="dv">1</span>)<span class="op">/</span><span class="kw">beta</span>(<span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb30-10"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-10"></a></span>
+<span id="cb30-11"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-11"></a>tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">post1 =</span> post1, <span class="dt">post2 =</span> post2) <span class="op">%&gt;%</span></span>
+<span id="cb30-12"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-12"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols=</span><span class="op">-</span>x, <span class="dt">values_to=</span><span class="st">&quot;density&quot;</span>, <span class="dt">names_to=</span><span class="st">&quot;type&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb30-13"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-13"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb30-14"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-14"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>density, <span class="dt">color=</span>type)) <span class="op">+</span></span>
+<span id="cb30-15"><a href="binomial-proportions-via-mathematical-analysis.html#cb30-15"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set2&quot;</span>)</span></code></pre></div>
+<p><img src="Chapter5_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Tail-biased coin model probability = 0.009901.</p>
+<p>Head-biased model probability = 0.990099.</p>
+<p>The Bayes Factor = 0.01.</p>
+<p>There is significantly more evidence in favor of the head-biased coin model.</p>
+</div>
+<div id="exercise-5.8" class="section level2">
+<h2><span class="header-section-number">5.7</span> Exercise 5.8</h2>
+<div id="part-a-3" class="section level3">
+<h3><span class="header-section-number">5.7.1</span> Part a</h3>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-1"></a>N &lt;-<span class="st"> </span><span class="dv">100</span></span>
+<span id="cb31-2"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-2"></a>x &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> N)</span>
+<span id="cb31-3"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-3"></a></span>
+<span id="cb31-4"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-4"></a><span class="co"># Model 1 - Tail-biased coin</span></span>
+<span id="cb31-5"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-5"></a>post1 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">9</span>, <span class="dv">104</span>)</span>
+<span id="cb31-6"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-6"></a>prob1 &lt;-<span class="st"> </span><span class="kw">beta</span>(<span class="dv">9</span>, <span class="dv">104</span>)<span class="op">/</span><span class="kw">beta</span>(<span class="dv">1</span>, <span class="dv">100</span>)</span>
+<span id="cb31-7"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-7"></a><span class="co"># Model 2 - Head-biased coin</span></span>
+<span id="cb31-8"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-8"></a>post2 &lt;-<span class="st"> </span><span class="kw">dbeta</span>(x, <span class="dv">108</span>, <span class="dv">5</span>)</span>
+<span id="cb31-9"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-9"></a>prob2 &lt;-<span class="st"> </span><span class="kw">beta</span>(<span class="dv">108</span>, <span class="dv">5</span>)<span class="op">/</span><span class="kw">beta</span>(<span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb31-10"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-10"></a></span>
+<span id="cb31-11"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-11"></a>tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">x =</span> x, <span class="dt">post1 =</span> post1, <span class="dt">post2 =</span> post2) <span class="op">%&gt;%</span></span>
+<span id="cb31-12"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-12"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols=</span><span class="op">-</span>x, <span class="dt">values_to=</span><span class="st">&quot;density&quot;</span>, <span class="dt">names_to=</span><span class="st">&quot;type&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb31-13"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-13"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb31-14"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-14"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>density, <span class="dt">color=</span>type)) <span class="op">+</span></span>
+<span id="cb31-15"><a href="binomial-proportions-via-mathematical-analysis.html#cb31-15"></a><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Set2&quot;</span>)</span></code></pre></div>
+<p><img src="Chapter5_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Tail-biased coin model probability = 2.022200910^{-12}.</p>
+<p>Head-biased model probability = 1.490827210^{-7}.</p>
+<p>The Bayes Factor = 1.356428810^{-5}.</p>
+<p>There is significantly more evidence in favor of the head-biased coin model.</p>
+</div>
+<div id="part-b-2" class="section level3">
+<h3><span class="header-section-number">5.7.2</span> Part b</h3>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="binomial-proportions-via-mathematical-analysis.html#cb32-1"></a>iterations &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb32-2"><a href="binomial-proportions-via-mathematical-analysis.html#cb32-2"></a>heads &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, iterations)</span>
+<span id="cb32-3"><a href="binomial-proportions-via-mathematical-analysis.html#cb32-3"></a></span>
+<span id="cb32-4"><a href="binomial-proportions-via-mathematical-analysis.html#cb32-4"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(heads)) {</span>
+<span id="cb32-5"><a href="binomial-proportions-via-mathematical-analysis.html#cb32-5"></a>  theta &lt;-<span class="st"> </span><span class="kw">rbeta</span>(<span class="dv">1</span>, <span class="dv">108</span>, <span class="dv">5</span>)</span>
+<span id="cb32-6"><a href="binomial-proportions-via-mathematical-analysis.html#cb32-6"></a>  heads[i] &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dv">1</span>, <span class="dv">12</span>, theta)</span>
+<span id="cb32-7"><a href="binomial-proportions-via-mathematical-analysis.html#cb32-7"></a>}</span>
+<span id="cb32-8"><a href="binomial-proportions-via-mathematical-analysis.html#cb32-8"></a></span>
+<span id="cb32-9"><a href="binomial-proportions-via-mathematical-analysis.html#cb32-9"></a><span class="kw">ggplot</span>()<span class="op">+</span></span>
+<span id="cb32-10"><a href="binomial-proportions-via-mathematical-analysis.html#cb32-10"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>heads))</span></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="Chapter5_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>1000 samples of size 12 were simulated.</p>
+</div>
+<div id="part-c-2" class="section level3">
+<h3><span class="header-section-number">5.7.3</span> Part c</h3>
+<p>Different values of <span class="math inline">\(\theta\)</span> were used for each simulated sample because each time we sample from the posterior distribution of <span class="math inline">\(\theta\)</span>.</p>
+</div>
+<div id="part-d-2" class="section level3">
+<h3><span class="header-section-number">5.7.4</span> Part d</h3>
+<p>The heads-biased model, while better than the tails-biased model, is still not a good fit to the observed data (8 heads in 12 tosses); it predicts a much higher number of heads than observed.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="bayes-rule.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

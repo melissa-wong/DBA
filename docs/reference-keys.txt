@@ -30,3 +30,14 @@ part-a-1
 part-c-1
 part-d-1
 excercse-5.3
+exercise-5.4
+exercise-5.5
+part-a-2
+part-b-1
+exercise-5.6
+exercise-5.7
+exercise-5.8
+part-a-3
+part-b-2
+part-c-2
+part-d-2
