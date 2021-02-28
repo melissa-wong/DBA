@@ -24,3 +24,9 @@ exercise-4.4
 exercise-4.5
 exercise-4.6
 exercise-4.7
+binomial-proportions-via-mathematical-analysis
+excercise-5.1
+part-a-1
+part-c-1
+part-d-1
+excercse-5.3
